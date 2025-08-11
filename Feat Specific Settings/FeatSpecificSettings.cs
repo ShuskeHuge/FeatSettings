@@ -19,7 +19,7 @@ namespace FeatSettings
         {
             try
             {
-                AddToModSettings("FeatSettings");
+                AddToModSettings($"FeatSettings_{GetType().Name}");
                 RefreshGUI();
                 ApplyAdjustedFeatSettings();
             }
