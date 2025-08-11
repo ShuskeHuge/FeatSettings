@@ -3,7 +3,7 @@
 
     <PropertyGroup>
         <!--This needs to be changed for the mod to compile.-->
-        <TheLongDarkPath>C:\Program Files (x86)\Steam\steamapps\common\TheLongDark</TheLongDarkPath>
+        <TheLongDarkPath>D:\SteamLibrary\steamapps\common\TheLongDark</TheLongDarkPath>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -29,7 +29,7 @@
     <!--This tells the compiler where to look for assemblies. Don't change it.-->
     <PropertyGroup>
         <MelonLoaderPath>$(TheLongDarkPath)/MelonLoader/net6</MelonLoaderPath>
-        <ManagedPath>$(TheLongDarkPath)/MelonLoader/Managed</ManagedPath>
+        <ManagedPath>$(TheLongDarkPath)/MelonLoader/Il2CppAssemblies</ManagedPath>
         <Il2CppPath>$(TheLongDarkPath)/MelonLoader/Il2CppAssemblies</Il2CppPath>
         <ModsPath>$(TheLongDarkPath)/Mods</ModsPath>
         <AssemblySearchPaths>$(AssemblySearchPaths);$(MelonLoaderPath);$(ManagedPath);$(Il2CppPath);$(ModsPath);</AssemblySearchPaths>
