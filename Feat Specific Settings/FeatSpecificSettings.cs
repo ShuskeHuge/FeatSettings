@@ -1,4 +1,4 @@
-﻿using Il2Cpp;
+using Il2Cpp;
 using MelonLoader;
 using ModSettings;
 
@@ -7,6 +7,8 @@ namespace FeatSettings
     public abstract class FeatSpecificSettingsBase : JsonModSettings
     {
         protected FeatSettingsManager mManager;
+        private static bool isFirstInitialization = true;
+        private static readonly object initLock = new object();
 
         public FeatSpecificSettingsBase(FeatSettingsManager manager)
         {
@@ -14,12 +16,18 @@ namespace FeatSettings
             Initialize();
         }
 
-
         protected virtual void Initialize()
         {
             try
             {
-                AddToModSettings($"FeatSettings_{GetType().Name}");
+                lock (initLock)
+                {
+                    if (isFirstInitialization)
+                    {
+                        AddToModSettings("FeatSettings");
+                        isFirstInitialization = false;
+                    }
+                }
                 RefreshGUI();
                 ApplyAdjustedFeatSettings();
             }
@@ -29,12 +37,12 @@ namespace FeatSettings
             }
         }
 
-
         protected override void OnConfirm()
         {
             try
             {
                 ApplyAdjustedFeatSettings();
+                FeatSettingsManager.Instance.ApplyAllFeatSettings();
             }
             catch (Exception e)
             {
@@ -42,10 +50,8 @@ namespace FeatSettings
             }
         }
 
-
         public abstract void ApplyAdjustedFeatSettings();
     }
-
 
     public abstract class FeatSpecificSettings<T> : FeatSpecificSettingsBase where T : Feat
     {
