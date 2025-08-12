@@ -179,5 +179,21 @@ namespace FeatSettings
         }
 
         #endregion
+
+        public void ApplyAllFeatSettings()
+        {
+            try
+            {
+                foreach (var featSetting in mFeatSettingsDict.Values)
+                {
+                    featSetting.ApplyAdjustedFeatSettings();
+                }
+                Log("Applied all feat settings successfully");
+            }
+            catch (Exception e)
+            {
+                Log($"ERROR in ApplyAllFeatSettings: {e}");
+    }
+}
     }
 }
